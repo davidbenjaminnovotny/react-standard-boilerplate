@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
-
+import { useTranslation } from 'react-i18next';
 
 import {useTransition, animated} from "react-spring";
 
@@ -51,6 +51,11 @@ function Nav() {
                 return <li key={e.name}><Link to={e.link}  onClick={() => setShowMenu(false)}>{e.name}</Link></li>
             })
             }
+            <ul>
+                <button onClick={()=>changeLang('en')}>English</button>
+                <button onClick={()=>changeLang('de')}>German</button>
+                <button onClick={()=>changeLang('fr')}>French</button>
+            </ul>
         </ul>;
 
     const mobileMenu =
@@ -61,9 +66,15 @@ function Nav() {
                     return <li key={e.name}><Link to={e.link}  onClick={() => setShowMenu(false)}>{e.name}</Link></li>
                 })
                 }
-            </ul>
+            </ul> c
         </div>;
 
+    // Trigger change of language
+    const { i18n } = useTranslation();
+
+    function changeLang(lang){
+      i18n.changeLanguage(lang)
+    }
 
     return (
         <nav className="w-1/5">
